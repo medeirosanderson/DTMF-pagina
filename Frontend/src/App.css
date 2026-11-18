@@ -1,0 +1,246 @@
+#root {
+  min-height: 100vh;
+}
+
+.cabecalho {
+  min-height: 76px;
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  background: #f7f1e5;
+  border-bottom: 1px solid rgba(75, 50, 32, 0.12);
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #a52d26;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 0.98;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.marca-icone {
+  color: #75b9e7;
+  font-size: 30px;
+}
+
+.navegacao {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 42px);
+}
+
+.navegacao a {
+  color: #28251f;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.navegacao a:hover,
+.navegacao a:focus-visible {
+  color: #b52e27;
+}
+
+main > section {
+  padding: 64px 8vw;
+  scroll-margin-top: 24px;
+}
+
+main > section h1,
+main > section h2,
+main > section p {
+  margin-top: 0;
+}
+
+#inicio {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  display: grid;
+  align-content: center;
+  background: #e9e1d2;
+}
+
+#linha-do-tempo {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+#linha-do-tempo h2 {
+  margin-bottom: 20px;
+}
+
+.imagem-capa {
+  position: absolute;
+  inset: 0;
+  background-image: url('/imagens/bananal-cadeiras.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.texto-capa {
+  color: white;
+  padding: 32px 3vw;
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.texto-capa h1 {
+  max-width: 700px;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.95;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .cabecalho {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 6vw;
+    gap: 18px;
+  }
+
+  .navegacao {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+
+  main > section {
+    padding: 48px 7vw;
+  }
+}
+
+.sobretitulo {
+  color: #a52d26;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+
+.marcos {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 48px;
+  position: relative;
+}
+
+.marco {
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
+
+.marco h3 {
+  color: #173d30;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  margin: 24px 0 12px;
+}
+
+.data {
+  color: #a52d26;
+  font-weight: 700;
+}
+
+.ponto {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 16px auto;
+  border: 3px solid #75b9e7;
+  border-radius: 50%;
+  background: #f7f1e5;
+  position: relative;
+  z-index: 1; 
+}
+
+.marcos::before {
+  content: '';
+  position: absolute;
+  top: 45px;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  background: #a52d26;
+}
+
+.cartoes-faixas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.cartao-faixa {
+  width: 240px;
+  padding: 12px 12px 18px;
+  background: #fffaf0;
+  box-shadow: 0 8px 20px rgba(44, 35, 20, 0.14);
+  transform: rotate(-2deg);
+}
+
+.imagem-faixa {
+  height: 180px;
+  background-color: #d6cbb8;
+}
+
+.foto-dtmf,
+.foto-nuevayol,
+.foto-baile-inolvidable,
+.foto-turista,
+.foto-hawaii {
+  background-image: url('/imagens/dtmf.png');
+  background-size: cover;
+  background-position: center;
+}
+.cartao-1 { transform: rotate(-3deg); }
+
+.foto-nuevayol {
+  background-image: url('/imagens/nuevayol.png');
+}
+
+.cartao-2 { transform: rotate(2deg); }
+
+.foto-baile-inolvidable {
+  background-image: url('/imagens/baile-inolvidable.png');
+}
+
+.cartao-3 { transform: rotate(-1deg); }
+
+.foto-turista {
+  background-image: url('/imagens/turista.png');
+}
+
+.cartao-4 { transform: rotate(3deg); }
+
+.foto-hawaii {
+  background-image: url('/imagens/hawaii.png');
+}
+
+.cartao-5 { transform: rotate(-2deg); }
+
+.cartao-faixa h3 {
+  margin: 12px 0 4px;
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #173d30;
+}
+
+.cartao-faixa p {
+  margin: 0;
+  color: #5b554b;
+}
