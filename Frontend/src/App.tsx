@@ -1,6 +1,32 @@
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
+
+  const [quizIniciado, setQuizIniciado] = useState(false)
+  const [sessaoAtiva, setSessaoAtiva] = useState('inicio')
+
+  useEffect(() => {
+  const secoes = document.querySelectorAll('main > section[id]')
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          setSessaoAtiva(entrada.target.id)
+        }
+      })
+    },
+    {
+      threshold: 0.5,
+    },
+  )
+
+  secoes.forEach((secao) => observador.observe(secao))
+
+  return () => observador.disconnect()
+}, [])
+
   return (
     <>
       <header className="cabecalho">
@@ -10,21 +36,59 @@ function App() {
         </a>
 
         <nav className="navegacao" aria-label="Navegação principal">
-          <a href="#inicio">O álbum</a>
-          <a href="#linha-do-tempo">Linha do tempo</a>
-          <a href="#faixas">As faixas</a>
-          <a href="#porto-rico">Porto Rico</a>
-          <a href="#quiz">Quiz</a>
+            <a href="#inicio" onClick={() => setSessaoAtiva('inicio')}> O álbum {sessaoAtiva === 'inicio' && (
+                <span>
+                  <img src="/imagens/icone-concho.png" alt="" className="icone-menu concho-inicio" />
+                </span>
+              )}
+            </a>
+            <a href="#linha-do-tempo" onClick={() => setSessaoAtiva('linha-do-tempo')}>Linha do tempo {sessaoAtiva === 'linha-do-tempo' && (
+              <span>
+                <img src="/imagens/icone-concho.png" alt="" className="icone-menu concho-trajetoria" />
+              </span>
+            )}
+            </a>
+            <a href="#faixas" onClick={() => setSessaoAtiva('faixas')}>As faixas {sessaoAtiva === 'faixas' && (
+              <span>
+                <img src="/imagens/icone-concho.png" alt="" className="icone-menu concho-faixas" />
+              </span>
+            )}
+            </a>
+            <a href="#porto-rico" onClick={() => setSessaoAtiva('porto-rico')}>Porto Rico {sessaoAtiva === 'porto-rico' && (
+              <span>
+                <img src="/imagens/icone-concho.png" alt="" className="icone-menu concho-porto-rico" />
+              </span>
+            )}
+            </a>
+            <a href="#quiz" onClick={() => setSessaoAtiva('quiz')}>Quiz {sessaoAtiva === 'quiz' && (
+              <span>
+                <img src="/imagens/icone-concho.png" alt="" className="icone-menu concho-quiz" />
+              </span>
+            )}
+            </a>  
         </nav>
       </header>
 
       <main>
+        {sessaoAtiva === 'inicio' && (
+          <img
+            src="/imagens/icone-concho.png"
+            alt=""
+            className="concho-espiando"
+          />
+        )}
         <section id="inicio">
           <div className="imagem-capa" aria-hidden="true"></div>
           <div className='texto-capa'>
             <h1>DeBÍ TiRAR MáS FOToS</h1>
             <p>Uma viagem pela memória, pela música e por Porto Rico.</p>
           </div>
+          <img 
+            key={sessaoAtiva === 'inicio' ? 'inicio' : 'outra-secao'}
+            src="/imagens/concho-em-pe.png"
+            alt=""
+            className="concho-capa"
+          />
         </section>
 
         <section id="linha-do-tempo">
@@ -100,8 +164,67 @@ function App() {
           </div>
         </section>
 
-        <section id="porto-rico"><h2>Porto Rico: o coração do álbum</h2></section>
-        <section id="quiz"><h2>O que ficou na memória?</h2></section>
+        <section id="porto-rico">
+          <p className='sobretitulo'>CAPÍTULO 03 · AS RAÍZES</p>
+          <h2>Porto Rico: o coração do álbum</h2>
+          <div className='conteudo-porto-rico'>          
+            <div className='texto-porto-rico'>
+              <p>
+                  O álbum resgata memórias, sons e imagens da ilha, fala da sua gente,
+                  da cultura que resiste e das tensões do presente.
+              </p>
+              <div className="nota-musica">
+                <h3>A bandeira azul-clara em “LA MuDANZA”</h3>
+                <p>
+                  Na faixa, Bad Bunny menciona a bandeira azul-clara ao falar de Eugenio
+                  María de Hostos e do desejo de trazer seus restos mortais de volta a Porto
+                  Rico. Essa tonalidade também carrega associações históricas com a
+                  identidade porto-riquenha e o movimento independentista.
+                </p>
+              </div>
+            </div>
+            <div className='bandeira-porto-rico' aria-label='Bandeira de Porto Rico'>
+              <span className='triangulo-bandeira'>
+                <span className='estrela-bandeira'>★</span>
+              </span>
+            </div>
+            <div className="capa-album">
+              <img 
+                src="/imagens/capa-album.webp" 
+                alt="Capa do álbum DeBÍ TiRAR MáS FOToS, com duas cadeiras diante de bananeiras" 
+              />
+            </div>
+          </div>
+        </section>
+
+        <section id="quiz">
+          <p className='sobretitulo'>CAPÍTULO 04 · TESTE SUA MEMÓRIA</p>
+          <h2>O que ficou na memória?</h2>
+          <p>
+                Descubra o quanto você conhece sobre o álbum, as faixas e as referências
+                de Porto Rico.
+          </p>
+          {!quizIniciado ? (
+            <div className="convite-quiz">
+              <h3>Vamos testar sua memória?</h3>
+              <p>Responda algumas perguntas sobre a trajetória e os sons do álbum.</p>
+              <button 
+              type='button'
+              onClick={() => setQuizIniciado(true)}
+              >
+                Começar o quiz
+              </button>
+            </div>
+          ) : (
+            <div className="convite-quiz">
+              <h3>Primeira pergunta</h3>
+              <p>Em que ano foi lançado DeBÍ TiRAR MáS FOToS?</p>
+              <button type="button">2024</button>
+              <button type="button">2025</button>
+              <button type="button">2026</button>
+            </div>
+          )}
+        </section>
       </main>
     </>
   )
